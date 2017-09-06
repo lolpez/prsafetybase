@@ -26,8 +26,8 @@ GlobalConfig::$CONNECTION_SETTING->Multibyte = true;
 // GlobalConfig::$CONNECTION_SETTING->BootstrapSQL = "SET SQL_BIG_SELECTS=1";
 
 /** the root url of the application with trailing slash, for example http://localhost/prsafetybase web/ */
-//GlobalConfig::$ROOT_URL = RequestUtil::GetServerRootUrl() . '';
-GlobalConfig::$ROOT_URL = RequestUtil::GetServerRootUrl() . 'prsafetybase/';
+GlobalConfig::$ROOT_URL = RequestUtil::GetServerRootUrl() . '';
+//GlobalConfig::$ROOT_URL = RequestUtil::GetServerRootUrl() . 'prsafetybase/';
 
 /** timezone */
 // date_default_timezone_set("UTC");
