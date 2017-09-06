@@ -18,14 +18,15 @@ require_once("verysimple/HTTP/RequestUtil.php");
 GlobalConfig::$CONNECTION_SETTING = new ConnectionSetting();
 GlobalConfig::$CONNECTION_SETTING->ConnectionString = "localhost:3306";
 GlobalConfig::$CONNECTION_SETTING->DBName = "safebase";
-GlobalConfig::$CONNECTION_SETTING->Username = "root";
-GlobalConfig::$CONNECTION_SETTING->Password = "";
+GlobalConfig::$CONNECTION_SETTING->Username = "adminxh5eFKk";
+GlobalConfig::$CONNECTION_SETTING->Password = "IJDDMP7aVI-S";
 GlobalConfig::$CONNECTION_SETTING->Type = "MySQL";
 GlobalConfig::$CONNECTION_SETTING->Charset = "utf8";
 GlobalConfig::$CONNECTION_SETTING->Multibyte = true;
 // GlobalConfig::$CONNECTION_SETTING->BootstrapSQL = "SET SQL_BIG_SELECTS=1";
 
 /** the root url of the application with trailing slash, for example http://localhost/prsafetybase web/ */
+//GlobalConfig::$ROOT_URL = RequestUtil::GetServerRootUrl() . '';
 GlobalConfig::$ROOT_URL = RequestUtil::GetServerRootUrl() . 'prsafetybase/';
 
 /** timezone */

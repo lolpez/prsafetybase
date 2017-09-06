@@ -34,7 +34,7 @@ if (ini_get('asp_tags'))
 set_include_path(
 		GlobalConfig::$APP_ROOT . '/libs/' . PATH_SEPARATOR .
 		'phar://' . GlobalConfig::$APP_ROOT . '/libs/phreeze-3.3.8.phar' . PATH_SEPARATOR .
-		GlobalConfig::$APP_ROOT . '//libs/phreeze/' . PATH_SEPARATOR .
+		GlobalConfig::$APP_ROOT . '/libs/phreeze/' . PATH_SEPARATOR .
 		GlobalConfig::$APP_ROOT . '/vendor/phreeze/phreeze/libs/' . PATH_SEPARATOR .
 		get_include_path()
 );
