@@ -118,9 +118,10 @@ GlobalConfig::$ROUTE_MAP = array(
 	'DELETE:api/safmultimedia/(:num)' => array('route' => 'SafMultimedia.Delete', 'params' => array('id' => 2)),
 		
 	// SafReport
-	'GET:safreports' => array('route' => 'SafReport.ListView'),
+	'GET:report' => array('route' => 'SafReport.Index'),
 	'GET:safreport/(:num)' => array('route' => 'SafReport.SingleView', 'params' => array('id' => 1)),
 	'GET:api/safreports' => array('route' => 'SafReport.Query'),
+    'GET:gg' => array('route' => 'SafReport.ListReports'),
 	'POST:api/safreport' => array('route' => 'SafReport.Create'),
 	'GET:api/safreport/(:num)' => array('route' => 'SafReport.Read', 'params' => array('id' => 2)),
 	'PUT:api/safreport/(:num)' => array('route' => 'SafReport.Update', 'params' => array('id' => 2)),
@@ -140,6 +141,7 @@ GlobalConfig::$ROUTE_MAP = array(
 	'GET:safworker/(:num)' => array('route' => 'SafWorker.SingleView', 'params' => array('id' => 1)),
 	'GET:api/safworkers' => array('route' => 'SafWorker.Query'),
 	'POST:api/safworker' => array('route' => 'SafWorker.Create'),
+	'POST:api/registerWorker' => array('route' => 'SafWorker.RegisterWorker'),
 	'GET:api/safworker/(:num)' => array('route' => 'SafWorker.Read', 'params' => array('id' => 2)),
 	'PUT:api/safworker/(:num)' => array('route' => 'SafWorker.Update', 'params' => array('id' => 2)),
 	'DELETE:api/safworker/(:num)' => array('route' => 'SafWorker.Delete', 'params' => array('id' => 2)),

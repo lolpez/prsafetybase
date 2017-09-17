@@ -54,6 +54,7 @@ class SafWorkerMap implements IDaoMap, IDaoMap2
 			self::$FM["Id"] = new FieldMap("Id","saf_worker","id",true,FM_TYPE_INT,11,null,true);
 			self::$FM["User"] = new FieldMap("User","saf_worker","user",false,FM_TYPE_VARCHAR,20,null,false);
 			self::$FM["Password"] = new FieldMap("Password","saf_worker","password",false,FM_TYPE_VARCHAR,20,null,false);
+			self::$FM["Enrollment"] = new FieldMap("Enrollment","saf_worker","enrollment",false,FM_TYPE_INT,11,null,false);
 			self::$FM["FkHuman"] = new FieldMap("FkHuman","saf_worker","fk_human",false,FM_TYPE_INT,11,null,false);
 			self::$FM["FkRole"] = new FieldMap("FkRole","saf_worker","fk_role",false,FM_TYPE_INT,11,null,false);
 			self::$FM["FkDepartment"] = new FieldMap("FkDepartment","saf_worker","fk_department",false,FM_TYPE_INT,11,null,false);

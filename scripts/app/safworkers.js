@@ -266,6 +266,7 @@ var page = {
 
 			'user': $('input#user').val(),
 			'password': $('input#password').val(),
+			'enrollment': $('input#enrollment').val(),
 			'fkHuman': $('input#fkHuman').val(),
 			'fkRole': $('input#fkRole').val(),
 			'fkDepartment': $('input#fkDepartment').val(),

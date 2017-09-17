@@ -1,8 +1,8 @@
 <?php
-	$this->assign('title','PrSafetyBase WEB | SafHumans');
+	$this->assign('title','SAFEBASE | SafHumans');
 	$this->assign('nav','safhumans');
 
-	$this->display('_Header.tpl.php');
+	$this->display('_Header2.tpl.php');
 ?>
 
 <script type="text/javascript">
@@ -160,5 +160,5 @@
 </div> <!-- /container -->
 
 <?php
-	$this->display('_Footer.tpl.php');
+	$this->display('_Footer2.tpl.php');
 ?>

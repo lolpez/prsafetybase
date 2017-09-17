@@ -52,12 +52,12 @@ class SafReportMap implements IDaoMap, IDaoMap2
 		{
 			self::$FM = Array();
 			self::$FM["Id"] = new FieldMap("Id","saf_report","id",true,FM_TYPE_INT,11,null,true);
-			self::$FM["FkTrabajador"] = new FieldMap("FkTrabajador","saf_report","fk_trabajador",false,FM_TYPE_INT,11,null,false);
+			self::$FM["FkWorker"] = new FieldMap("FkWorker","saf_report","fk_worker",false,FM_TYPE_INT,11,null,false);
 			self::$FM["Date"] = new FieldMap("Date","saf_report","date",false,FM_TYPE_DATE,null,null,false);
 			self::$FM["Time"] = new FieldMap("Time","saf_report","time",false,FM_TYPE_TIME,null,null,false);
 			self::$FM["Description"] = new FieldMap("Description","saf_report","description",false,FM_TYPE_TEXT,null,null,false);
-			self::$FM["Latitude"] = new FieldMap("Latitude","saf_report","latitude",false,FM_TYPE_FLOAT,null,null,false);
-			self::$FM["Longitude"] = new FieldMap("Longitude","saf_report","longitude",false,FM_TYPE_FLOAT,null,null,false);
+			self::$FM["Latitude"] = new FieldMap("Latitude","saf_report","latitude",false,FM_TYPE_VARCHAR,50,null,false);
+			self::$FM["Longitude"] = new FieldMap("Longitude","saf_report","longitude",false,FM_TYPE_VARCHAR,50,null,false);
 			self::$FM["ReportType"] = new FieldMap("ReportType","saf_report","report_type",false,FM_TYPE_INT,11,null,false);
 			self::$FM["Enabled"] = new FieldMap("Enabled","saf_report","enabled",false,FM_TYPE_TINYINT,1,"1",false);
 		}

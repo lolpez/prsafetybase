@@ -1,16 +1,17 @@
 <?php
-/** @package    PrSafetyBase WEB::Controller */
+/** @package    SAFEBASE::Controller */
 
 /** import supporting libraries */
 require_once("AppBaseController.php");
 require_once("Model/SafReport.php");
+require_once("Model/SafNotification.php");
 
 /**
  * SafReportController is the controller class for the SafReport object.  The
  * controller is responsible for processing input from the user, reading/updating
  * the model as necessary and displaying the appropriate view.
  *
- * @package PrSafetyBase WEB::Controller
+ * @package SAFEBASE::Controller
  * @author ClassBuilder
  * @version 1.0
  */
@@ -35,6 +36,15 @@ class SafReportController extends AppBaseController
 	/**
 	 * Displays a list view of SafReport objects
 	 */
+    public function Index()
+    {
+        $this->Assign('departments',$this->Phreezer->Query('SafDepartment')->ToObjectArray(true, $this->SimpleObjectParams()));
+        $this->Render("ReportHome");
+    }
+
+    /**
+     * Displays a list view of SafReport objects
+     */
 	public function ListView()
 	{
 		$this->Render();
@@ -52,7 +62,7 @@ class SafReportController extends AppBaseController
 			// TODO: this will limit results based on all properties included in the filter list 
 			$filter = RequestUtil::Get('filter');
 			if ($filter) $criteria->AddFilter(
-				new CriteriaFilter('Id,FkTrabajador,Date,Time,Description,Latitude,Longitude,ReportType,Enabled'
+				new CriteriaFilter('Id,FkWorker,Date,Time,Description,Latitude,Longitude,ReportType,Enabled'
 				, '%'.$filter.'%')
 			);
 
@@ -138,7 +148,6 @@ class SafReportController extends AppBaseController
 	{
 		try
 		{
-						
 			$json = json_decode(RequestUtil::GetBody());
 
 			if (!$json)
@@ -147,33 +156,31 @@ class SafReportController extends AppBaseController
 			}
 
 			$safreport = new SafReport($this->Phreezer);
-
-			// TODO: any fields that should not be inserted by the user should be commented out
-
-			// this is an auto-increment.  uncomment if updating is allowed
-			// $safreport->Id = $this->SafeGetVal($json, 'id');
-
-			$safreport->FkTrabajador = $this->SafeGetVal($json, 'fkTrabajador');
-			$safreport->Date = date('Y-m-d H:i:s',strtotime($this->SafeGetVal($json, 'date')));
-			$safreport->Time = date('H:i:s',strtotime('1970-01-01 ' . $this->SafeGetVal($json, 'time')));
+            $safreport->FkWorker = 1;
+			$safreport->Date = date('Y-m-d');
+			$safreport->Time = date('H:i:s');
 			$safreport->Description = $this->SafeGetVal($json, 'description');
 			$safreport->Latitude = $this->SafeGetVal($json, 'latitude');
 			$safreport->Longitude = $this->SafeGetVal($json, 'longitude');
 			$safreport->ReportType = $this->SafeGetVal($json, 'reportType');
-			$safreport->Enabled = $this->SafeGetVal($json, 'enabled');
-
+            $workers = $this->SafeGetVal($json, 'workers');
 			$safreport->Validate();
-			$errors = $safreport->GetValidationErrors();
 
-			if (count($errors) > 0)
-			{
-				$this->RenderErrorJSON('Please check the form for errors',$errors);
-			}
-			else
-			{
-				$safreport->Save();
-				$this->RenderJSON($safreport, $this->JSONPCallback(), true, $this->SimpleObjectParams());
-			}
+            if (count($safreport->GetValidationErrors()) > 0)
+            {
+                echo json_encode(array('success'=> false, 'message'=> 'Ocurrió un error al registrar un nuevo reporte: '. json_encode($safreport->GetValidationErrors())));
+                return;
+            }
+
+            $safreport->Save();
+            foreach ($workers as $workerid) {
+                $safnotification = new SafNotification($this->Phreezer);
+                $safnotification->FkReport = $safreport->Id;
+                $safnotification->FkWorkerOrigin = 1;
+                $safnotification->FkWorkerDestiny = $workerid;
+                $safnotification->Save();
+            }
+            echo json_encode(array('success'=> true, 'message'=> 'Reporte con id: '. $safreport->Id .' registrado correctamente' ));
 
 		}
 		catch (Exception $ex)
@@ -205,7 +212,7 @@ class SafReportController extends AppBaseController
 			// this is a primary key.  uncomment if updating is allowed
 			// $safreport->Id = $this->SafeGetVal($json, 'id', $safreport->Id);
 
-			$safreport->FkTrabajador = $this->SafeGetVal($json, 'fkTrabajador', $safreport->FkTrabajador);
+			$safreport->FkWorker = $this->SafeGetVal($json, 'fkWorker', $safreport->FkWorker);
 			$safreport->Date = date('Y-m-d H:i:s',strtotime($this->SafeGetVal($json, 'date', $safreport->Date)));
 			$safreport->Time = date('Y-m-d H:i:s',strtotime('1970-01-01 ' . $this->SafeGetVal($json, 'time', $safreport->Time)));
 			$safreport->Description = $this->SafeGetVal($json, 'description', $safreport->Description);
@@ -227,12 +234,9 @@ class SafReportController extends AppBaseController
 				$this->RenderJSON($safreport, $this->JSONPCallback(), true, $this->SimpleObjectParams());
 			}
 
-
 		}
 		catch (Exception $ex)
 		{
-
-
 			$this->RenderExceptionJSON($ex);
 		}
 	}

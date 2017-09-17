@@ -1,8 +1,8 @@
 <?php
-	$this->assign('title','PrSafetyBase WEB | SafWorkers');
+	$this->assign('title','SAFEBASE | SafWorkers');
 	$this->assign('nav','safworkers');
 
-	$this->display('_Header.tpl.php');
+	$this->display('_Header2.tpl.php');
 ?>
 
 <script type="text/javascript">
@@ -37,9 +37,10 @@
 				<th id="header_Id">Id<% if (page.orderBy == 'Id') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_User">User<% if (page.orderBy == 'User') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_Password">Password<% if (page.orderBy == 'Password') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
+				<th id="header_Enrollment">Enrollment<% if (page.orderBy == 'Enrollment') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_FkHuman">Fk Human<% if (page.orderBy == 'FkHuman') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
-				<th id="header_FkRole">Fk Role<% if (page.orderBy == 'FkRole') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 <!-- UNCOMMENT TO SHOW ADDITIONAL COLUMNS
+				<th id="header_FkRole">Fk Role<% if (page.orderBy == 'FkRole') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_FkDepartment">Fk Department<% if (page.orderBy == 'FkDepartment') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_Enabled">Enabled<% if (page.orderBy == 'Enabled') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 -->
@@ -51,9 +52,10 @@
 				<td><%= _.escape(item.get('id') || '') %></td>
 				<td><%= _.escape(item.get('user') || '') %></td>
 				<td><%= _.escape(item.get('password') || '') %></td>
+				<td><%= _.escape(item.get('enrollment') || '') %></td>
 				<td><%= _.escape(item.get('fkHuman') || '') %></td>
-				<td><%= _.escape(item.get('fkRole') || '') %></td>
 <!-- UNCOMMENT TO SHOW ADDITIONAL COLUMNS
+				<td><%= _.escape(item.get('fkRole') || '') %></td>
 				<td><%= _.escape(item.get('fkDepartment') || '') %></td>
 				<td><%= _.escape(item.get('enabled') || '') %></td>
 -->
@@ -87,6 +89,13 @@
 					<label class="control-label" for="password">Password</label>
 					<div class="controls inline-inputs">
 						<input type="text" class="input-xlarge" id="password" placeholder="Password" value="<%= _.escape(item.get('password') || '') %>">
+						<span class="help-inline"></span>
+					</div>
+				</div>
+				<div id="enrollmentInputContainer" class="control-group">
+					<label class="control-label" for="enrollment">Enrollment</label>
+					<div class="controls inline-inputs">
+						<input type="text" class="input-xlarge" id="enrollment" placeholder="Enrollment" value="<%= _.escape(item.get('enrollment') || '') %>">
 						<span class="help-inline"></span>
 					</div>
 				</div>
@@ -169,5 +178,5 @@
 </div> <!-- /container -->
 
 <?php
-	$this->display('_Footer.tpl.php');
+	$this->display('_Footer2.tpl.php');
 ?>

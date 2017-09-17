@@ -1,5 +1,5 @@
 <?php
-	$this->assign('title','PrSafetyBase WEB | SafReports');
+	$this->assign('title','SAFEBASE | SafReports');
 	$this->assign('nav','safreports');
 
 	$this->display('_Header.tpl.php');
@@ -35,7 +35,7 @@
 		<thead>
 			<tr>
 				<th id="header_Id">Id<% if (page.orderBy == 'Id') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
-				<th id="header_FkTrabajador">Fk Trabajador<% if (page.orderBy == 'FkTrabajador') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
+				<th id="header_FkWorker">Fk Worker<% if (page.orderBy == 'FkWorker') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_Date">Date<% if (page.orderBy == 'Date') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_Time">Time<% if (page.orderBy == 'Time') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_Description">Description<% if (page.orderBy == 'Description') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
@@ -51,7 +51,7 @@
 		<% items.each(function(item) { %>
 			<tr id="<%= _.escape(item.get('id')) %>">
 				<td><%= _.escape(item.get('id') || '') %></td>
-				<td><%= _.escape(item.get('fkTrabajador') || '') %></td>
+				<td><%= _.escape(item.get('fkWorker') || '') %></td>
 				<td><%if (item.get('date')) { %><%= _date(app.parseDate(item.get('date'))).format('MMM D, YYYY') %><% } else { %>NULL<% } %></td>
 				<td><%if (item.get('time')) { %><%= _date(app.parseDate(item.get('time'))).format('h:mm A') %><% } else { %>NULL<% } %></td>
 				<td><%= _.escape(item.get('description') || '') %></td>
@@ -80,10 +80,10 @@
 						<span class="help-inline"></span>
 					</div>
 				</div>
-				<div id="fkTrabajadorInputContainer" class="control-group">
-					<label class="control-label" for="fkTrabajador">Fk Trabajador</label>
+				<div id="fkWorkerInputContainer" class="control-group">
+					<label class="control-label" for="fkWorker">Fk Worker</label>
 					<div class="controls inline-inputs">
-						<input type="text" class="input-xlarge" id="fkTrabajador" placeholder="Fk Trabajador" value="<%= _.escape(item.get('fkTrabajador') || '') %>">
+						<input type="text" class="input-xlarge" id="fkWorker" placeholder="Fk Worker" value="<%= _.escape(item.get('fkWorker') || '') %>">
 						<span class="help-inline"></span>
 					</div>
 				</div>

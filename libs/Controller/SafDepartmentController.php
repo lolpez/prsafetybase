@@ -1,5 +1,5 @@
 <?php
-/** @package    PrSafetyBase WEB::Controller */
+/** @package    SAFEBASE::Controller */
 
 /** import supporting libraries */
 require_once("AppBaseController.php");
@@ -10,7 +10,7 @@ require_once("Model/SafDepartment.php");
  * controller is responsible for processing input from the user, reading/updating
  * the model as necessary and displaying the appropriate view.
  *
- * @package PrSafetyBase WEB::Controller
+ * @package SAFEBASE::Controller
  * @author ClassBuilder
  * @version 1.0
  */

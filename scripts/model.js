@@ -1,5 +1,5 @@
 /**
- * backbone model definitions for PrSafetyBase WEB
+ * backbone model definitions for SAFEBASE
  */
 
 /**
@@ -14,7 +14,7 @@ var model = {};
  * long polling duration in miliseconds.  (5000 = recommended, 0 = disabled)
  * warning: setting this to a low number will increase server load
  */
-model.longPollDuration = 5000;
+model.longPollDuration = 0;
 
 /**
  * whether to refresh the collection immediately after a model is updated
@@ -157,32 +157,6 @@ model.SafDepartmentCollection = model.AbstractCollection.extend({
 });
 
 /**
- * SafDepartmentDetail Backbone Model
- */
-model.SafDepartmentDetailModel = Backbone.Model.extend({
-	urlRoot: 'api/safdepartmentdetail',
-	idAttribute: 'id',
-	id: '',
-	fkDepartment: '',
-	fkMultimedia: '',
-	enabled: '',
-	defaults: {
-		'id': null,
-		'fkDepartment': '',
-		'fkMultimedia': '',
-		'enabled': ''
-	}
-});
-
-/**
- * SafDepartmentDetail Backbone Collection
- */
-model.SafDepartmentDetailCollection = model.AbstractCollection.extend({
-	url: 'api/safdepartmentdetails',
-	model: model.SafDepartmentDetailModel
-});
-
-/**
  * SafHuman Backbone Model
  */
 model.SafHumanModel = Backbone.Model.extend({
@@ -243,13 +217,41 @@ model.SafMultimediaCollection = model.AbstractCollection.extend({
 });
 
 /**
+ * SafNotification Backbone Model
+ */
+model.SafNotificationModel = Backbone.Model.extend({
+	urlRoot: 'api/safnotification',
+	idAttribute: 'id',
+	id: '',
+	fkWorkerOrigin: '',
+	fkWorkerDestiny: '',
+	fkReport: '',
+	enabled: '',
+	defaults: {
+		'id': null,
+		'fkWorkerOrigin': '',
+		'fkWorkerDestiny': '',
+		'fkReport': '',
+		'enabled': ''
+	}
+});
+
+/**
+ * SafNotification Backbone Collection
+ */
+model.SafNotificationCollection = model.AbstractCollection.extend({
+	url: 'api/safnotifications',
+	model: model.SafNotificationModel
+});
+
+/**
  * SafReport Backbone Model
  */
 model.SafReportModel = Backbone.Model.extend({
 	urlRoot: 'api/safreport',
 	idAttribute: 'id',
 	id: '',
-	fkTrabajador: '',
+	fkWorker: '',
 	date: '',
 	time: '',
 	description: '',
@@ -259,7 +261,7 @@ model.SafReportModel = Backbone.Model.extend({
 	enabled: '',
 	defaults: {
 		'id': null,
-		'fkTrabajador': '',
+		'fkWorker': '',
 		'date': new Date(),
 		'time': '',
 		'description': '',
@@ -276,6 +278,32 @@ model.SafReportModel = Backbone.Model.extend({
 model.SafReportCollection = model.AbstractCollection.extend({
 	url: 'api/safreports',
 	model: model.SafReportModel
+});
+
+/**
+ * SafReportDetail Backbone Model
+ */
+model.SafReportDetailModel = Backbone.Model.extend({
+	urlRoot: 'api/safreportdetail',
+	idAttribute: 'id',
+	id: '',
+	fkReport: '',
+	fkMultimedia: '',
+	enabled: '',
+	defaults: {
+		'id': null,
+		'fkReport': '',
+		'fkMultimedia': '',
+		'enabled': ''
+	}
+});
+
+/**
+ * SafReportDetail Backbone Collection
+ */
+model.SafReportDetailCollection = model.AbstractCollection.extend({
+	url: 'api/safreportdetails',
+	model: model.SafReportDetailModel
 });
 
 /**
@@ -311,6 +339,7 @@ model.SafWorkerModel = Backbone.Model.extend({
 	id: '',
 	user: '',
 	password: '',
+	enrollment: '',
 	fkHuman: '',
 	fkRole: '',
 	fkDepartment: '',
@@ -319,6 +348,7 @@ model.SafWorkerModel = Backbone.Model.extend({
 		'id': null,
 		'user': '',
 		'password': '',
+		'enrollment': '',
 		'fkHuman': '',
 		'fkRole': '',
 		'fkDepartment': '',

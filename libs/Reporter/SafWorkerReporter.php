@@ -25,6 +25,7 @@ class SafWorkerReporter extends Reporter
 	public $Id;
 	public $User;
 	public $Password;
+	public $Enrollment;
 	public $FkHuman;
 	public $FkRole;
 	public $FkDepartment;
@@ -45,6 +46,7 @@ class SafWorkerReporter extends Reporter
 			,`saf_worker`.`id` as Id
 			,`saf_worker`.`user` as User
 			,`saf_worker`.`password` as Password
+			,`saf_worker`.`enrollment` as Enrollment
 			,`saf_worker`.`fk_human` as FkHuman
 			,`saf_worker`.`fk_role` as FkRole
 			,`saf_worker`.`fk_department` as FkDepartment

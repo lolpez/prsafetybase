@@ -4,6 +4,7 @@
 /** import supporting libraries */
 require_once("AppBaseController.php");
 require_once("Model/SafWorker.php");
+require_once("Model/SafHuman.php");
 
 /**
  * SafWorkerController is the controller class for the SafWorker object.  The
@@ -38,7 +39,7 @@ class SafWorkerController extends AppBaseController
 	public function ListView()
 	{
 		$this->Render();
-	}
+    }
 
 	/**
 	 * API Method queries for SafWorker records and render as JSON
@@ -52,7 +53,7 @@ class SafWorkerController extends AppBaseController
 			// TODO: this will limit results based on all properties included in the filter list 
 			$filter = RequestUtil::Get('filter');
 			if ($filter) $criteria->AddFilter(
-				new CriteriaFilter('Id,User,Password,FkHuman,FkRole,FkDepartment,Enabled'
+				new CriteriaFilter('Id,User,Password,Enrollment,FkHuman,FkRole,FkDepartment,Enabled'
 				, '%'.$filter.'%')
 			);
 
@@ -155,6 +156,7 @@ class SafWorkerController extends AppBaseController
 
 			$safworker->User = $this->SafeGetVal($json, 'user');
 			$safworker->Password = $this->SafeGetVal($json, 'password');
+			$safworker->Enrollment = $this->SafeGetVal($json, 'enrollment');
 			$safworker->FkHuman = $this->SafeGetVal($json, 'fkHuman');
 			$safworker->FkRole = $this->SafeGetVal($json, 'fkRole');
 			$safworker->FkDepartment = $this->SafeGetVal($json, 'fkDepartment');
@@ -205,6 +207,7 @@ class SafWorkerController extends AppBaseController
 
 			$safworker->User = $this->SafeGetVal($json, 'user', $safworker->User);
 			$safworker->Password = $this->SafeGetVal($json, 'password', $safworker->Password);
+			$safworker->Enrollment = $this->SafeGetVal($json, 'enrollment', $safworker->Enrollment);
 			$safworker->FkHuman = $this->SafeGetVal($json, 'fkHuman', $safworker->FkHuman);
 			$safworker->FkRole = $this->SafeGetVal($json, 'fkRole', $safworker->FkRole);
 			$safworker->FkDepartment = $this->SafeGetVal($json, 'fkDepartment', $safworker->FkDepartment);
@@ -258,6 +261,80 @@ class SafWorkerController extends AppBaseController
 			$this->RenderExceptionJSON($ex);
 		}
 	}
+
+    /**
+     * API Method inserts a new SafWorker and SafHuman record and render response as JSON
+     */
+    public function RegisterWorker()
+    {
+        try
+        {
+
+            $json = json_decode(RequestUtil::GetBody());
+
+            if (!$json)
+            {
+                throw new Exception('The request body does not contain valid JSON');
+            }
+
+            $safhuman = new SafHuman($this->Phreezer);
+            $safhuman->Ci = $this->SafeGetVal($json, 'ci');
+            $safhuman->Name = $this->SafeGetVal($json, 'name');
+            $safhuman->PhoneNumber = $this->SafeGetVal($json, 'phoneNumber');
+            $safhuman->BloodType = $this->SafeGetVal($json, 'bloodType');
+            $safhuman->Validate();
+            if (count($safhuman->GetValidationErrors()) > 0)
+            {
+                echo 0;
+                return;
+            }else{
+                $safhuman->Save();
+            }
+
+
+
+
+
+            $safworker = new SafWorker($this->Phreezer);
+
+            // TODO: any fields that should not be inserted by the user should be commented out
+
+            // this is an auto-increment.  uncomment if updating is allowed
+            // $safworker->Id = $this->SafeGetVal($json, 'id');
+
+            $safworker->User = $safhuman->Ci;
+            $safworker->Password = $this->SafeGetVal($json, 'enrollment');
+            $safworker->Enrollment = $this->SafeGetVal($json, 'enrollment');
+            $safworker->FkHuman = $safhuman->Id;
+            $safworker->FkRole = $this->SafeGetVal($json, 'role');
+            $safworker->FkDepartment = $this->SafeGetVal($json, 'department');
+            $safworker->Validate();
+
+            if (count($safworker->GetValidationErrors()) > 0)
+            {
+                echo 0;
+            }
+            else
+            {
+                $safworker->Save();
+                $responsehuman = new stdClass();
+                $responsehuman->id = $safhuman->Id;
+                $responsehuman->ci = $safhuman->Ci;
+                $responsehuman->name = $safhuman->Name;
+                $responsehuman->enrollment = 666;
+                $responsehuman->bloodType = $safhuman->BloodType;
+                $responsehuman->department = 69;
+                $responsehuman->role = 123;
+                $responsehuman->phoneNumber = 489;
+                echo json_encode(array('t' => $responsehuman, 'success'=> true, 'message'=> 'LMAO' ));
+            }
+
+        }
+        catch (Exception $ex)
+        {
+            $this->RenderExceptionJSON($ex);
+        }
+    }
 }
 
 ?>

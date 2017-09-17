@@ -31,6 +31,9 @@ class SafWorkerDAO extends Phreezable
 	public $Password;
 
 	/** @var int */
+	public $Enrollment;
+
+	/** @var int */
 	public $FkHuman;
 
 	/** @var int */

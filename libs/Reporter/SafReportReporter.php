@@ -23,7 +23,7 @@ class SafReportReporter extends Reporter
 	public $CustomFieldExample;
 
 	public $Id;
-	public $FkTrabajador;
+	public $FkWorker;
 	public $Date;
 	public $Time;
 	public $Description;
@@ -45,7 +45,7 @@ class SafReportReporter extends Reporter
 		$sql = "select
 			'custom value here...' as CustomFieldExample
 			,`saf_report`.`id` as Id
-			,`saf_report`.`fk_trabajador` as FkTrabajador
+			,`saf_report`.`fk_worker` as FkWorker
 			,`saf_report`.`date` as Date
 			,`saf_report`.`time` as Time
 			,`saf_report`.`description` as Description

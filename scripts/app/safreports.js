@@ -264,7 +264,7 @@ var page = {
 
 		page.safReport.save({
 
-			'fkTrabajador': $('input#fkTrabajador').val(),
+			'fkWorker': $('input#fkWorker').val(),
 			'date': $('input#date').val(),
 			'time': $('input#time').val(),
 			'description': $('textarea#description').val(),

@@ -1,5 +1,5 @@
 <?php
-	$this->assign('title','PrSafetyBase WEB | SafMultimedias');
+	$this->assign('title','SAFEBASE | SafMultimedias');
 	$this->assign('nav','safmultimedias');
 
 	$this->display('_Header.tpl.php');

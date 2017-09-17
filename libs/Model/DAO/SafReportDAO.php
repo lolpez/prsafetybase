@@ -25,7 +25,7 @@ class SafReportDAO extends Phreezable
 	public $Id;
 
 	/** @var int */
-	public $FkTrabajador;
+	public $FkWorker;
 
 	/** @var date */
 	public $Date;
