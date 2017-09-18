@@ -267,6 +267,7 @@ var page = {
 			'filename': $('input#filename').val(),
 			'extension': $('input#extension').val(),
 			'location': $('input#location').val(),
+			'thumbLocation': $('input#thumbLocation').val(),
 			'type': $('input#type').val(),
 			'enabled': $('input#enabled').val()
 		}, {

@@ -18,8 +18,8 @@ require_once("verysimple/HTTP/RequestUtil.php");
 GlobalConfig::$CONNECTION_SETTING = new ConnectionSetting();
 GlobalConfig::$CONNECTION_SETTING->ConnectionString = "localhost:3306";
 GlobalConfig::$CONNECTION_SETTING->DBName = "safebase";
-GlobalConfig::$CONNECTION_SETTING->Username = "adminxh5eFKk";
-GlobalConfig::$CONNECTION_SETTING->Password = "IJDDMP7aVI-S";
+GlobalConfig::$CONNECTION_SETTING->Username = "adminxh5eFKk"; //adminxh5eFKk
+GlobalConfig::$CONNECTION_SETTING->Password = "IJDDMP7aVI-S"; //IJDDMP7aVI-S
 GlobalConfig::$CONNECTION_SETTING->Type = "MySQL";
 GlobalConfig::$CONNECTION_SETTING->Charset = "utf8";
 GlobalConfig::$CONNECTION_SETTING->Multibyte = true;

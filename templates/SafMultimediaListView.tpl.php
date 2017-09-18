@@ -38,8 +38,9 @@
 				<th id="header_Filename">Filename<% if (page.orderBy == 'Filename') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_Extension">Extension<% if (page.orderBy == 'Extension') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_Location">Location<% if (page.orderBy == 'Location') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
-				<th id="header_Type">Type<% if (page.orderBy == 'Type') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
+				<th id="header_ThumbLocation">Thumb Location<% if (page.orderBy == 'ThumbLocation') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 <!-- UNCOMMENT TO SHOW ADDITIONAL COLUMNS
+				<th id="header_Type">Type<% if (page.orderBy == 'Type') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 				<th id="header_Enabled">Enabled<% if (page.orderBy == 'Enabled') { %> <i class='icon-arrow-<%= page.orderDesc ? 'up' : 'down' %>' /><% } %></th>
 -->
 			</tr>
@@ -51,8 +52,9 @@
 				<td><%= _.escape(item.get('filename') || '') %></td>
 				<td><%= _.escape(item.get('extension') || '') %></td>
 				<td><%= _.escape(item.get('location') || '') %></td>
-				<td><%= _.escape(item.get('type') || '') %></td>
+				<td><%= _.escape(item.get('thumbLocation') || '') %></td>
 <!-- UNCOMMENT TO SHOW ADDITIONAL COLUMNS
+				<td><%= _.escape(item.get('type') || '') %></td>
 				<td><%= _.escape(item.get('enabled') || '') %></td>
 -->
 			</tr>
@@ -92,6 +94,13 @@
 					<label class="control-label" for="location">Location</label>
 					<div class="controls inline-inputs">
 						<input type="text" class="input-xlarge" id="location" placeholder="Location" value="<%= _.escape(item.get('location') || '') %>">
+						<span class="help-inline"></span>
+					</div>
+				</div>
+				<div id="thumbLocationInputContainer" class="control-group">
+					<label class="control-label" for="thumbLocation">Thumb Location</label>
+					<div class="controls inline-inputs">
+						<input type="text" class="input-xlarge" id="thumbLocation" placeholder="Thumb Location" value="<%= _.escape(item.get('thumbLocation') || '') %>">
 						<span class="help-inline"></span>
 					</div>
 				</div>

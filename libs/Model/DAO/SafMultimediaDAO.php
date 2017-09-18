@@ -33,6 +33,9 @@ class SafMultimediaDAO extends Phreezable
 	/** @var string */
 	public $Location;
 
+	/** @var string */
+	public $ThumbLocation;
+
 	/** @var int */
 	public $Type;
 

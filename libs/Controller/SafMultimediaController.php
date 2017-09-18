@@ -52,7 +52,7 @@ class SafMultimediaController extends AppBaseController
 			// TODO: this will limit results based on all properties included in the filter list 
 			$filter = RequestUtil::Get('filter');
 			if ($filter) $criteria->AddFilter(
-				new CriteriaFilter('Id,Filename,Extension,Location,Type,Enabled'
+				new CriteriaFilter('Id,Filename,Extension,Location,ThumbLocation,Type,Enabled'
 				, '%'.$filter.'%')
 			);
 
@@ -156,6 +156,7 @@ class SafMultimediaController extends AppBaseController
 			$safmultimedia->Filename = $this->SafeGetVal($json, 'filename');
 			$safmultimedia->Extension = $this->SafeGetVal($json, 'extension');
 			$safmultimedia->Location = $this->SafeGetVal($json, 'location');
+			$safmultimedia->ThumbLocation = $this->SafeGetVal($json, 'thumbLocation');
 			$safmultimedia->Type = $this->SafeGetVal($json, 'type');
 			$safmultimedia->Enabled = $this->SafeGetVal($json, 'enabled');
 
@@ -205,6 +206,7 @@ class SafMultimediaController extends AppBaseController
 			$safmultimedia->Filename = $this->SafeGetVal($json, 'filename', $safmultimedia->Filename);
 			$safmultimedia->Extension = $this->SafeGetVal($json, 'extension', $safmultimedia->Extension);
 			$safmultimedia->Location = $this->SafeGetVal($json, 'location', $safmultimedia->Location);
+			$safmultimedia->ThumbLocation = $this->SafeGetVal($json, 'thumbLocation', $safmultimedia->ThumbLocation);
 			$safmultimedia->Type = $this->SafeGetVal($json, 'type', $safmultimedia->Type);
 			$safmultimedia->Enabled = $this->SafeGetVal($json, 'enabled', $safmultimedia->Enabled);
 

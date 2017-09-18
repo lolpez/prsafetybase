@@ -196,6 +196,7 @@ model.SafMultimediaModel = Backbone.Model.extend({
 	filename: '',
 	extension: '',
 	location: '',
+	thumbLocation: '',
 	type: '',
 	enabled: '',
 	defaults: {
@@ -203,6 +204,7 @@ model.SafMultimediaModel = Backbone.Model.extend({
 		'filename': '',
 		'extension': '',
 		'location': '',
+		'thumbLocation': '',
 		'type': '',
 		'enabled': ''
 	}

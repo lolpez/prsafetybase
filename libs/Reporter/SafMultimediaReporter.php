@@ -26,6 +26,7 @@ class SafMultimediaReporter extends Reporter
 	public $Filename;
 	public $Extension;
 	public $Location;
+	public $ThumbLocation;
 	public $Type;
 	public $Enabled;
 
@@ -45,6 +46,7 @@ class SafMultimediaReporter extends Reporter
 			,`saf_multimedia`.`filename` as Filename
 			,`saf_multimedia`.`extension` as Extension
 			,`saf_multimedia`.`location` as Location
+			,`saf_multimedia`.`thumb_location` as ThumbLocation
 			,`saf_multimedia`.`type` as Type
 			,`saf_multimedia`.`enabled` as Enabled
 		from `saf_multimedia`";

@@ -55,6 +55,7 @@ class SafMultimediaMap implements IDaoMap, IDaoMap2
 			self::$FM["Filename"] = new FieldMap("Filename","saf_multimedia","filename",false,FM_TYPE_VARCHAR,50,null,false);
 			self::$FM["Extension"] = new FieldMap("Extension","saf_multimedia","extension",false,FM_TYPE_VARCHAR,5,null,false);
 			self::$FM["Location"] = new FieldMap("Location","saf_multimedia","location",false,FM_TYPE_VARCHAR,200,null,false);
+			self::$FM["ThumbLocation"] = new FieldMap("ThumbLocation","saf_multimedia","thumb_location",false,FM_TYPE_VARCHAR,200,null,false);
 			self::$FM["Type"] = new FieldMap("Type","saf_multimedia","type",false,FM_TYPE_INT,11,null,false);
 			self::$FM["Enabled"] = new FieldMap("Enabled","saf_multimedia","enabled",false,FM_TYPE_TINYINT,1,"1",false);
 		}

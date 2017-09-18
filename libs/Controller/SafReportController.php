@@ -5,6 +5,8 @@
 require_once("AppBaseController.php");
 require_once("Model/SafReport.php");
 require_once("Model/SafNotification.php");
+require_once("Model/SafMultimedia.php");
+require_once("Model/SafReportDetail.php");
 
 /**
  * SafReportController is the controller class for the SafReport object.  The
@@ -146,48 +148,98 @@ class SafReportController extends AppBaseController
 	 */
 	public function Create()
 	{
-		try
-		{
-			$json = json_decode(RequestUtil::GetBody());
+        try
+        {
 
-			if (!$json)
-			{
-				throw new Exception('The request body does not contain valid JSON');
-			}
+            date_default_timezone_set("America/La_Paz");
+            $data = json_decode($_POST['data']);
 
-			$safreport = new SafReport($this->Phreezer);
+            $safreport = new SafReport($this->Phreezer);
             $safreport->FkWorker = 1;
-			$safreport->Date = date('Y-m-d');
-			$safreport->Time = date('H:i:s');
-			$safreport->Description = $this->SafeGetVal($json, 'description');
-			$safreport->Latitude = $this->SafeGetVal($json, 'latitude');
-			$safreport->Longitude = $this->SafeGetVal($json, 'longitude');
-			$safreport->ReportType = $this->SafeGetVal($json, 'reportType');
-            $workers = $this->SafeGetVal($json, 'workers');
-			$safreport->Validate();
+            $safreport->Date = date('Y-m-d');
+            $safreport->Time = date('H:i:s');
+            $safreport->Description = $data->description;
+            $safreport->Latitude = $data->latitude;
+            $safreport->Longitude = $data->longitude;
+            $safreport->ReportType = $data->reportType;
 
+            $safreport->Validate();
             if (count($safreport->GetValidationErrors()) > 0)
             {
-                echo json_encode(array('success'=> false, 'message'=> 'Ocurrió un error al registrar un nuevo reporte: '. json_encode($safreport->GetValidationErrors())));
+                echo json_encode(
+                    array(
+                        'success'=> false,
+                        'message'=> 'Ocurrió un error al registrar un nuevo reporte: '. json_encode($safreport->GetValidationErrors())
+                    )
+                );
                 return;
             }
-
             $safreport->Save();
-            foreach ($workers as $workerid) {
-                $safnotification = new SafNotification($this->Phreezer);
-                $safnotification->FkReport = $safreport->Id;
-                $safnotification->FkWorkerOrigin = 1;
-                $safnotification->FkWorkerDestiny = $workerid;
-                $safnotification->Save();
+            //Multimedia
+            if (isset($_FILES)){
+                foreach ($_FILES as $file) {
+                    //Insert multimedia
+                    $safmultimedia = new SafMultimedia($this->Phreezer);
+                    $safmultimedia->Extension = pathinfo($file["name"],PATHINFO_EXTENSION);
+                    $safmultimedia->Filename = md5(uniqid(rand(), true));
+                    $safmultimedia->Location = "resources/images/reports/". $safmultimedia->Filename . "." . $safmultimedia->Extension;
+                    $safmultimedia->ThumbLocation = "resources/images/reports/thumb/". $safmultimedia->Filename . "." . $safmultimedia->Extension;
+                    $safmultimedia->Type = 1;
+                    move_uploaded_file($file['tmp_name'], $safmultimedia->Location);
+                    $this->thumbnail($safmultimedia->Filename . "." . $safmultimedia->Extension, 'resources/images/reports/', 'resources/images/reports/thumb/', 400, 400 );
+                    $safmultimedia->Save();
+                    //Insert report detail
+                    $safreport_detail = new SafReportDetail($this->Phreezer);
+                    $safreport_detail->FkMultimedia = $safmultimedia->Id;
+                    $safreport_detail->FkReport = $safreport->Id;
+                    $safreport_detail->Save();
+                }
             }
-            echo json_encode(array('success'=> true, 'message'=> 'Reporte con id: '. $safreport->Id .' registrado correctamente' ));
-
-		}
-		catch (Exception $ex)
-		{
-			$this->RenderExceptionJSON($ex);
-		}
+            //Notification
+            if (isset($data->workers)){
+                foreach ($data->workers as $workerid) {
+                    $safnotification = new SafNotification($this->Phreezer);
+                    $safnotification->FkReport = $safreport->Id;
+                    $safnotification->FkWorkerOrigin = 1;
+                    $safnotification->FkWorkerDestiny = $workerid;
+                    $safnotification->Save();
+                }
+            }
+            echo json_encode(array('success'=> true, 'message'=> 'Reporte con id: '. $safreport->Id .' registrado correctamente', 't'=>$safreport));
+        }
+        catch (Exception $ex)
+        {
+            echo json_encode(array('success'=> false, 'message'=> 'Ocurrió un error al registrar un nuevo reporte: '. $ex->getMessage()));
+        }
 	}
+
+    public function thumbnail( $img, $source, $dest, $maxw, $maxh ) {
+        $jpg = $source.$img;
+
+        if( $jpg ) {
+            list( $width, $height  ) = getimagesize( $jpg );
+            $source = imagecreatefromjpeg( $jpg );
+
+            if( $maxw >= $width && $maxh >= $height ) {
+                $ratio = 1;
+            }elseif( $width > $height ) {
+                $ratio = $maxw / $width;
+            }else {
+                $ratio = $maxh / $height;
+            }
+
+            $thumb_width = round( $width * $ratio );
+            $thumb_height = round( $height * $ratio );
+
+            $thumb = imagecreatetruecolor( $thumb_width, $thumb_height );
+            imagecopyresampled($thumb, $source, 0, 0, 0, 0, $thumb_width, $thumb_height, $width, $height );
+
+            $path = $dest.$img;
+            imagejpeg( $thumb, $path, 75 );
+        }
+        imagedestroy($thumb);
+        imagedestroy($source);
+    }
 
 	/**
 	 * API Method updates an existing SafReport record and render response as JSON
