@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c2bc9c7f-e9e6-4396-8a0c-eea7805607ed" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/ReportHome.tpl.php" afterPath="$PROJECT_DIR$/templates/ReportHome.tpl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/Controller/SafMultimediaController.php" afterPath="$PROJECT_DIR$/libs/Controller/SafMultimediaController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/Model/DAO/SafMultimediaCriteriaDAO.php" afterPath="$PROJECT_DIR$/libs/Model/DAO/SafMultimediaCriteriaDAO.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/Model/DAO/SafMultimediaDAO.php" afterPath="$PROJECT_DIR$/libs/Model/DAO/SafMultimediaDAO.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/SafMultimediaListView.tpl.php" afterPath="$PROJECT_DIR$/templates/SafMultimediaListView.tpl.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/Model/DAO/SafMultimediaMap.php" afterPath="$PROJECT_DIR$/libs/Model/DAO/SafMultimediaMap.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/Reporter/SafMultimediaReporter.php" afterPath="$PROJECT_DIR$/libs/Reporter/SafMultimediaReporter.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/libs/Controller/SafReportController.php" afterPath="$PROJECT_DIR$/libs/Controller/SafReportController.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/_machine_config.php" afterPath="$PROJECT_DIR$/_machine_config.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/model.js" afterPath="$PROJECT_DIR$/scripts/model.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/app/safmultimedias.js" afterPath="$PROJECT_DIR$/scripts/app/safmultimedias.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="prsafetybase.iws" />
@@ -41,8 +31,8 @@
       <file leaf-file-name="_machine_config.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/_machine_config.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.47685835" vertical-offset="0" max-vertical-offset="850">
-              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.35764375" vertical-offset="0" max-vertical-offset="850">
+              <caret line="25" column="77" selection-start-line="25" selection-start-column="77" selection-end-line="25" selection-end-column="77" />
               <folding />
             </state>
           </provider>
@@ -195,7 +185,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -570,8 +560,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/_machine_config.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.47685835" vertical-offset="0" max-vertical-offset="850">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.35764375" vertical-offset="0" max-vertical-offset="850">
+          <caret line="25" column="77" selection-start-line="25" selection-start-column="77" selection-end-line="25" selection-end-column="77" />
           <folding />
         </state>
       </provider>

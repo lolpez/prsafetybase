@@ -16,7 +16,7 @@
 # php_value session.use_only_cookies 1
 
 ## PHP FILE UPLOAD LIMITS
-# php_value upload_max_filesize 3M
+php_value upload_max_filesize 10M
 # php_value post_max_size 3M
 # php_value max_execution_time 200
 # php_value max_input_time 200
