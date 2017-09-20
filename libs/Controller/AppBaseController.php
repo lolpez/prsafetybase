@@ -28,6 +28,8 @@ class AppBaseController extends Controller
 	protected function Init()
 	{
 		// TODO: add app-wide bootsrap code
+
+        $this->Assign("currentUser", $this->GetCurrentUser());
 		
 		// EXAMPLE: require authentication to access the app
 		/*

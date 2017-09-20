@@ -73,11 +73,11 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="#"><i class="mdi-hardware-keyboard-tab"></i> Cerrar Sesion</a>
+                                    <a href="logout"><i class="mdi-hardware-keyboard-tab"></i> Cerrar Sesión</a>
                                 </li>
                             </ul>
                             <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">
-                                John Wick<i class="mdi-navigation-arrow-drop-down right"></i>
+                                <?php $this->eprint($this->currentUser->Name); ?><i class="mdi-navigation-arrow-drop-down right"></i>
                             </a>
                             <p class="user-roal">Admin</p>
                         </div>

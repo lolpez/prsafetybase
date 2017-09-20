@@ -28,7 +28,8 @@ class ExampleUser implements IAuthenticatable
 	static $PERMISSION_USER = 2;
 	
 	public $Username = '';
-	
+	public $Name = '';
+
 	/**
 	 * Initialize the array of users.  Note, this is only done this way because the 
 	 * users are hard-coded for this example.  In your own code you would most likely
@@ -82,16 +83,14 @@ class ExampleUser implements IAuthenticatable
 	 */
 	public function Login($username,$password)
 	{
-		foreach (self::$USERS as $un=>$pw)
-		{
-			if ($username == $un && password_verify($password,$pw))
-			{
-				$this->Username = $username;
-				break;
-			}
-		}
-		
-		return $this->Username != '';
+		if ($username =="gg" && $password=="cock"){
+            $this->Username = $username;
+            $this->Name = "Luis Daniel";
+            return true;
+        }else{
+            return false;
+        }
+//		return $this->Username != '';
 	}
 	
 }

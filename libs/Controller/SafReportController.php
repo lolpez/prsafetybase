@@ -186,7 +186,7 @@ class SafReportController extends AppBaseController
                     $safmultimedia->ThumbLocation = "resources/images/reports/thumb/". $safmultimedia->Filename . "." . $safmultimedia->Extension;
                     $safmultimedia->Type = 1;
                     move_uploaded_file($file['tmp_name'], $safmultimedia->Location);
-                    $this->thumbnail($safmultimedia->Filename . "." . $safmultimedia->Extension, 'resources/images/reports/', 'resources/images/reports/thumb/', 400, 400 );
+                    //$this->thumbnail($safmultimedia->Filename . "." . $safmultimedia->Extension, 'resources/images/reports/', 'resources/images/reports/thumb/', 400, 400 );
                     $safmultimedia->Save();
                     //Insert report detail
                     $safreport_detail = new SafReportDetail($this->Phreezer);
@@ -205,7 +205,22 @@ class SafReportController extends AppBaseController
                     $safnotification->Save();
                 }
             }
-            echo json_encode(array('success'=> true, 'message'=> 'Reporte con id: '. $safreport->Id .' registrado correctamente', 't'=>$safreport));
+			$report = new stdClass();
+			$report->id = $safreport->Id;
+			$report->identifier = $data->identifier;
+			$report->fkUser = $safreport->FkWorker;
+			$report->date = $safreport->Date;
+			//$report->time = $safreport->Time;
+			$report->description = $safreport->Description;
+			$report->latitude = $safreport->Latitude;
+			$report->longitude = $safreport->Longitude;
+			$report->reportType = $safreport->ReportType;
+			$report->sent = true;
+			$report->images = array();
+			
+			
+            
+            echo json_encode(array('success'=> true, 'message'=> 'Reporte con id: '. $safreport->Id .' registrado correctamente', 't'=>$report));
         }
         catch (Exception $ex)
         {

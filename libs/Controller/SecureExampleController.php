@@ -31,13 +31,13 @@ class SecureExampleController extends AppBaseController
 	 */
 	public function UserPage()
 	{
-		$this->RequirePermission(ExampleUser::$PERMISSION_USER, 
-				'SecureExample.LoginForm', 
-				'Login is required to access the secure user page',
-				'You do not have permission to access the secure user page');
-		
+//		$this->RequirePermission(ExampleUser::$PERMISSION_USER,
+//				'SecureExample.LoginForm',
+//				'Login is required to access the secure user page',
+//				'You do not have permission to access the secure user page');
+
 		$this->Assign("currentUser", $this->GetCurrentUser());
-		
+
 		$this->Assign('page','userpage');
 		$this->Render("SecureExample");
 	}
@@ -76,12 +76,12 @@ class SecureExampleController extends AppBaseController
 	public function Login()
 	{
 		$user = new ExampleUser();
-		
+
 		if ($user->Login(RequestUtil::Get('username'), RequestUtil::Get('password')))
 		{
 			// login success
 			$this->SetCurrentUser($user);
-			$this->Redirect('SecureExample.UserPage');
+			$this->Redirect('Default.Home');
 		}
 		else
 		{
