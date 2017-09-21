@@ -64,7 +64,6 @@ class SecureExampleController extends AppBaseController
 	public function LoginForm()
 	{
 		$this->Assign("currentUser", $this->GetCurrentUser());
-		
 		$this->Assign('page','login');
 		$this->Render("SecureExample");
 	}

@@ -51,7 +51,7 @@ set_include_path(
  * Any classes that will be stored in the session can be added here
  * and will be pre-loaded on every page
  */
-require_once "App/ExampleUser.php";
+require_once "App/User.php";
 
 /**
  * RENDER ENGINE
@@ -75,11 +75,9 @@ GlobalConfig::$ROUTE_MAP = array(
 	'GET:' => array('route' => 'Default.Home'),
 		
 	// example authentication routes
-	'GET:loginform' => array('route' => 'SecureExample.LoginForm'),
-	'POST:login' => array('route' => 'SecureExample.Login'),
-	'GET:secureuser' => array('route' => 'SecureExample.UserPage'),
-	'GET:secureadmin' => array('route' => 'SecureExample.AdminPage'),
-	'GET:logout' => array('route' => 'SecureExample.Logout'),
+	'GET:loginform' => array('route' => 'Login.LoginForm'),
+	'POST:login' => array('route' => 'Login.Login'),
+	'GET:logout' => array('route' => 'Login.Logout'),
 		
 	// SafDepartment
 	'GET:safdepartments' => array('route' => 'SafDepartment.ListView'),
@@ -119,11 +117,11 @@ GlobalConfig::$ROUTE_MAP = array(
 		
 	// SafReport
 	'GET:report' => array('route' => 'SafReport.Index'),
-	'GET:safreport/(:num)' => array('route' => 'SafReport.SingleView', 'params' => array('id' => 1)),
+	'GET:report/(:num)' => array('route' => 'SafReport.SingleView', 'params' => array('id' => 1)),
 	'GET:api/safreports' => array('route' => 'SafReport.Query'),
     'GET:gg' => array('route' => 'SafReport.ListReports'),
 	'POST:api/safreport' => array('route' => 'SafReport.Create'),
-	'GET:api/safreport/(:num)' => array('route' => 'SafReport.Read', 'params' => array('id' => 2)),
+	'GET:api/report/(:num)' => array('route' => 'SafReport.Read', 'params' => array('id' => 2)),
 	'PUT:api/safreport/(:num)' => array('route' => 'SafReport.Update', 'params' => array('id' => 2)),
 	'DELETE:api/safreport/(:num)' => array('route' => 'SafReport.Delete', 'params' => array('id' => 2)),
 		

@@ -23,6 +23,34 @@ $this->display('_Menu.tpl.php');
             <p class="caption">We gotta skome some shit nigguh.</p>
             <div class="divider"></div>
         </div>
+        <div class="section">
+            <div class="row">
+                <?php foreach ($this->reports as $r){ ?>
+                    <div></div>
+                    <div class="col s12 m4">
+                        <div class="card">
+                            <?php if ($r->image){ ?>
+                                <div class="card-image">
+                                    <img src=" <?php echo $r->image ?>" alt="<?php echo $r->humanName ?>" title="Imagen subida por: <?php echo $r->humanName ?>" height="359px">
+                                </div>
+                            <?php } ?>
+                            <div class="card-content">
+                                <p class="row">
+                                    <span class="left"> Por <a href="#"><?php echo $r->humanName ?></a></span>
+                                    <span class="right"><?php echo $r->date." ".$r->time ?></span>
+                                </p>
+                                <p class="blog-post-content truncate"><?php echo $r->description ?></p>
+                            </div>
+                            <div class="card-action">
+                                <a href="./report/<?php echo $r->id ?>">
+                                    Ver más <?php if ($r->imageCount>0){ ?>(+<?php echo $r->imageCount ?> imagen<?php if ($r->imageCount>1){ ?>es<?php } ?>)<?php } ?>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
+        </div>
         <div class="fixed-action-btn" style="bottom: 50px; right: 19px;">
             <a id="btnOpenModal" class="btn-floating btn-large modal-trigger black" href="#mdlReport">
                 <i class="mdi-content-add"></i>
@@ -134,7 +162,6 @@ $(document).ready(function () {
             processData: false,
             cache: false
         }).done(function (response) {
-            console.log(response)
             response = JSON.parse(response);
             if (response.success){
                 alert(response.message);

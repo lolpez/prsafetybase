@@ -28,8 +28,6 @@ class AppBaseController extends Controller
 	protected function Init()
 	{
 		// TODO: add app-wide bootsrap code
-
-        $this->Assign("currentUser", $this->GetCurrentUser());
 		
 		// EXAMPLE: require authentication to access the app
 		/*
@@ -40,6 +38,14 @@ class AppBaseController extends Controller
 		}
 		//*/
 	}
+
+    protected function Validate(){
+        if (!$this->GetCurrentUser()){
+            $this->Redirect('Login.LoginForm');
+            return;
+        }
+        $this->Assign("currentUser", $this->GetCurrentUser());
+    }
 
 	/**
 	 * Returns the number of records to return per page

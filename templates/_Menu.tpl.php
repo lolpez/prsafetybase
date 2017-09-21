@@ -79,7 +79,7 @@
                             <a class="btn-flat dropdown-button waves-effect waves-light white-text profile-btn" href="#" data-activates="profile-dropdown">
                                 <?php $this->eprint($this->currentUser->Name); ?><i class="mdi-navigation-arrow-drop-down right"></i>
                             </a>
-                            <p class="user-roal">Admin</p>
+                            <p class="user-roal"> <?php $this->eprint($this->currentUser->RoleName); ?></p>
                         </div>
                     </div>
                 </li>

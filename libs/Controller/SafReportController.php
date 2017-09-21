@@ -28,11 +28,6 @@ class SafReportController extends AppBaseController
 	protected function Init()
 	{
 		parent::Init();
-
-		// TODO: add controller-wide bootstrap code
-		
-		// TODO: if authentiation is required for this entire controller, for example:
-		// $this->RequirePermission(ExampleUser::$PERMISSION_USER,'SecureExample.LoginForm');
 	}
 
 	/**
@@ -40,8 +35,34 @@ class SafReportController extends AppBaseController
 	 */
     public function Index()
     {
+        //Validar
+        parent::Validate();
+        $this->Assign('reports',$this->Phreezer->Query('SafReportReporter')->ToObjectArray(true, $this->SimpleObjectParams()));
         $this->Assign('departments',$this->Phreezer->Query('SafDepartment')->ToObjectArray(true, $this->SimpleObjectParams()));
         $this->Render("ReportHome");
+    }
+
+    public function SingleView(){
+        //Validar
+        parent::Validate();
+
+        $pk = $this->GetRouter()->GetUrlParam('id');
+        $safreport = $this->Phreezer->Get('SafReport',$pk);
+        require_once 'Model/SafReportDetailCriteria.php';
+        $criteria = new SafReportDetailCriteria();
+        $criteria->FkReport_Equals = $safreport->Id;
+        $details = $this->Phreezer->Query('SafReportDetail',$criteria)->ToObjectArray(true, $this->SimpleObjectParams());
+        $images = array();
+        foreach ($details as $r){
+            $image = $this->Phreezer->Get('SafMultimedia',$r->fkMultimedia);
+            array_push($images,$image->ToObject()->Location);
+        }
+        $worker =  $this->Phreezer->Get('SafWorker',$safreport->FkWorker);
+        $human =  $this->Phreezer->Get('SafHuman',$worker->FkHuman);
+        $this->Assign('report', $safreport->ToObject());
+        $this->Assign('human', $human->ToObject());
+        $this->Assign('images', $images);
+        $this->Render("ReportView");
     }
 
     /**
@@ -217,9 +238,7 @@ class SafReportController extends AppBaseController
 			$report->reportType = $safreport->ReportType;
 			$report->sent = true;
 			$report->images = array();
-			
-			
-            
+
             echo json_encode(array('success'=> true, 'message'=> 'Reporte con id: '. $safreport->Id .' registrado correctamente', 't'=>$report));
         }
         catch (Exception $ex)
