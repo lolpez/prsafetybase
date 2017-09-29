@@ -78,7 +78,11 @@ GlobalConfig::$ROUTE_MAP = array(
 	'GET:loginform' => array('route' => 'Login.LoginForm'),
 	'POST:login' => array('route' => 'Login.Login'),
 	'GET:logout' => array('route' => 'Login.Logout'),
-		
+
+    // SafNotification
+    'GET:notification' => array('route' => 'SafNotification.Index'),
+    'POST:notification' => array('route' => 'SafNotification.Create'),
+
 	// SafDepartment
 	'GET:safdepartments' => array('route' => 'SafDepartment.ListView'),
 	'GET:safdepartment/(:num)' => array('route' => 'SafDepartment.SingleView', 'params' => array('id' => 1)),
@@ -117,9 +121,10 @@ GlobalConfig::$ROUTE_MAP = array(
 		
 	// SafReport
 	'GET:report' => array('route' => 'SafReport.Index'),
+	'POST:report' => array('route' => 'SafReport.Register'),
 	'GET:report/(:num)' => array('route' => 'SafReport.SingleView', 'params' => array('id' => 1)),
 	'GET:api/safreports' => array('route' => 'SafReport.Query'),
-    'GET:gg' => array('route' => 'SafReport.ListReports'),
+    'POST:api/getreports' => array('route' => 'SafReport.ListReports'),
 	'POST:api/safreport' => array('route' => 'SafReport.Create'),
 	'GET:api/report/(:num)' => array('route' => 'SafReport.Read', 'params' => array('id' => 2)),
 	'PUT:api/safreport/(:num)' => array('route' => 'SafReport.Update', 'params' => array('id' => 2)),

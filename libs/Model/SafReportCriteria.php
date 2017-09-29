@@ -25,20 +25,16 @@ class SafReportCriteria extends SafReportCriteriaDAO
 	 * 
 	 * @see Criteria::GetFieldFromProp()
 	 */
-	/*
+
 	public function GetFieldFromProp($propname)
 	{
-		switch($propname)
-		{
-			 case 'CustomProp1':
-			 	return 'my_db_column_1';
-			 case 'CustomProp2':
-			 	return 'my_db_column_2';
-			default:
-				return parent::GetFieldFromProp($propname);
-		}
+		switch ($propname) {
+            case 'Id':
+                return 'saf_report.id';
+            default:
+                return parent::GetFieldFromProp($propname);
+        }
 	}
-	*/
 	
 	/**
 	 * For custom query logic, you may override OnPrepare and set the $this->_where to whatever

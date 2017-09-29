@@ -89,6 +89,9 @@
                 <li <?php if ($this->nav=='report') { echo 'class="active"'; } ?> >
                     <a href="./report" class="waves-effect waves-cyan"><i class="mdi-action-announcement"></i> Reporte</a>
                 </li>
+                <li <?php if ($this->nav=='notification') { echo 'class="active"'; } ?> >
+                    <a href="./notification" class="waves-effect waves-cyan"><i class="mdi-social-notifications"></i> Centro de notificaciones</a>
+                </li>
             </ul>
             <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only cyan"><i class="mdi-navigation-menu"></i></a>
         </aside>

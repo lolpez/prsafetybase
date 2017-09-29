@@ -32,6 +32,15 @@ class SafNotificationController extends AppBaseController
 		// $this->RequirePermission(ExampleUser::$PERMISSION_USER,'SecureExample.LoginForm');
 	}
 
+    /**
+     * Displays a list view of Notification objects
+     */
+    public function Index()
+    {
+        parent::Validate();
+        $this->Render('NotificationHome');
+    }
+
 	/**
 	 * Displays a list view of SafNotification objects
 	 */
@@ -135,48 +144,106 @@ class SafNotificationController extends AppBaseController
 	 * API Method inserts a new SafNotification record and render response as JSON
 	 */
 	public function Create()
-	{
-		try
-		{
-						
-			$json = json_decode(RequestUtil::GetBody());
+    {
+//		try
+//		{
+//
+//			$json = json_decode(RequestUtil::GetBody());
+//
+//			if (!$json)
+//			{
+//				throw new Exception('The request body does not contain valid JSON');
+//			}
+//
+//			$safnotification = new SafNotification($this->Phreezer);
+//
+//			// TODO: any fields that should not be inserted by the user should be commented out
+//
+//			// this is an auto-increment.  uncomment if updating is allowed
+//			// $safnotification->Id = $this->SafeGetVal($json, 'id');
+//
+//			$safnotification->FkWorkerOrigin = $this->SafeGetVal($json, 'fkWorkerOrigin');
+//			$safnotification->FkWorkerDestiny = $this->SafeGetVal($json, 'fkWorkerDestiny');
+//			$safnotification->FkReport = $this->SafeGetVal($json, 'fkReport');
+//			$safnotification->Enabled = $this->SafeGetVal($json, 'enabled');
+//
+//			$safnotification->Validate();
+//			$errors = $safnotification->GetValidationErrors();
+//
+//			if (count($errors) > 0)
+//			{
+//				$this->RenderErrorJSON('Please check the form for errors',$errors);
+//			}
+//			else
+//			{
+//				$safnotification->Save();
+//				$this->RenderJSON($safnotification, $this->JSONPCallback(), true, $this->SimpleObjectParams());
+//			}
+//
+//		}
+//		catch (Exception $ex)
+//		{
+//			$this->RenderExceptionJSON($ex);
+//		}
 
-			if (!$json)
-			{
-				throw new Exception('The request body does not contain valid JSON');
-			}
+        try
+        {
 
-			$safnotification = new SafNotification($this->Phreezer);
+            $json = json_decode(RequestUtil::GetBody());
 
-			// TODO: any fields that should not be inserted by the user should be commented out
+            if (!$json) {
+                throw new Exception('The request body does not contain valid JSON');
+            }
+            $id_firebase = $this->SafeGetVal($json, 'id_firebase');
+            $description = $this->SafeGetVal($json, 'description');
 
-			// this is an auto-increment.  uncomment if updating is allowed
-			// $safnotification->Id = $this->SafeGetVal($json, 'id');
 
-			$safnotification->FkWorkerOrigin = $this->SafeGetVal($json, 'fkWorkerOrigin');
-			$safnotification->FkWorkerDestiny = $this->SafeGetVal($json, 'fkWorkerDestiny');
-			$safnotification->FkReport = $this->SafeGetVal($json, 'fkReport');
-			$safnotification->Enabled = $this->SafeGetVal($json, 'enabled');
+            require_once 'resources/firebase/push.php';
+            require_once 'resources/firebase/firebase.php';
 
-			$safnotification->Validate();
-			$errors = $safnotification->GetValidationErrors();
 
-			if (count($errors) > 0)
-			{
-				$this->RenderErrorJSON('Please check the form for errors',$errors);
-			}
-			else
-			{
-				$safnotification->Save();
-				$this->RenderJSON($safnotification, $this->JSONPCallback(), true, $this->SimpleObjectParams());
-			}
 
-		}
-		catch (Exception $ex)
-		{
-			$this->RenderExceptionJSON($ex);
-		}
-	}
+
+            error_reporting(-1);
+            ini_set('display_errors', 'On');
+
+
+            $firebase = new Firebase();
+            $push = new Push();
+
+            // optional payload
+            $payload = array();
+            $payload['team'] = 'India';
+            $payload['score'] = '5.6';
+
+            // notification title
+            $title = "GG";
+
+            // notification message
+            $message = $description;
+
+
+            $push->setTitle($title);
+            $push->setMessage($message);
+
+            $push->setImage('');
+
+            $push->setIsBackground(FALSE);
+            $push->setPayload($payload);
+
+            $json = $push->getPush();
+            $regId = $id_firebase;
+            $response = $firebase->send($regId, $json);
+
+
+            echo json_encode(array('success' => true, 'message' => $response));
+        }
+        catch(Exception $ex)
+        {
+            $this->RenderExceptionJSON($ex);
+        }
+
+    }
 
 	/**
 	 * API Method updates an existing SafNotification record and render response as JSON
